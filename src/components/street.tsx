@@ -4,7 +4,7 @@ import AmpelFüß from "./ampel2";
 import AdjustOutlinedIcon from "@mui/icons-material/AdjustOutlined";
 import { Button } from "@mui/material";
 import { useStyles } from "../style/styles";
-import {  BuildWeg } from "../utils/whiteLine";
+import { BuildWeg } from "../utils/whiteLine";
 import { traficLight } from "../lib/Data";
 import NebenStraße from "./nebenStraße";
 import type { Color, Lights } from "../lib/types";
@@ -21,7 +21,7 @@ const Street: React.FC = () => {
 
   const handleClick = () => {
     setClick(true);
-    setActiveSignal("green");
+    
   };
 
   //change the color of main traffic light
