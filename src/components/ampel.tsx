@@ -1,7 +1,8 @@
 import { Box, Stack } from "@mui/material";
 import Light from "./light";
+import type { Color } from "../lib/types";
 
-const Ampel = ({ col }: { col: string }) => {
+const Ampel = ({ col }: { col: Color }) => {
   return (
     <>
       <Box

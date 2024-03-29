@@ -1,6 +1,7 @@
 import { Grid, Paper } from "@mui/material";
+import type { Color } from "../lib/types";
 
-const Light = ({ color }: { color: string }) => {
+const Light = ({ color }: { color: Color }) => {
   return (
     <>
       <Grid item>

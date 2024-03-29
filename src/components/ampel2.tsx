@@ -1,7 +1,8 @@
 import { Grid, Box } from "@mui/material";
 import Light from "./light";
+import type { Color } from "../lib/types";
 
-const AmpelFüß = ({ col }: { col: string }) => {
+const AmpelFüß = ({ col }: { col: Color }) => {
   return (
     <>
       <Box

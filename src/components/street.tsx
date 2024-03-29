@@ -8,18 +8,20 @@ import { useStyles } from "../style/styles";
 import { BuildLines, BuildWeg } from "../utils/whiteLine";
 import { traficLight, traficLightNebenStraße } from "../lib/Data";
 import NebenStraße from "./nebenStraße";
+import type { Lights } from "../lib/types";
+import type { Color } from "../lib/types";
 
 const Street: React.FC = () => {
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
-  const [activeSecSignal, setActiveSecSignal] = useState("red");
-  const [activeSignal, setActiveSignal] = useState("green");
-  const [click, setClick] = useState(false);
-  const [secClick, setSecClick] = useState(false);
-  const light = traficLight.find((lig) => lig.color === activeSignal);
+  const [activeSecSignal, setActiveSecSignal] = useState<Color>("red");
+  const [activeSignal, setActiveSignal] = useState<Color>("green");
+  const [click, setClick] = useState<boolean>(false);
+  const [secClick, setSecClick] = useState<boolean>(false);
+  const light = traficLight.find((lig) => lig.color === activeSignal) as Lights;
   const lightSec = traficLightNebenStraße.find(
     (lig) => lig.color === activeSecSignal
-  );
-  const [füßColor, setFüßColor] = useState("red");
+  ) as Lights;
+  const [füßColor, setFüßColor] = useState<Color>("red");
 
   const handleClick = () => {
     setClick(true);
