@@ -1,8 +1,9 @@
+import { Color } from "../lib/types"
 import { useStyles } from "../style/styles"
 import { BuildLinesVertical } from "../utils/whiteLine"
 import Ampel3 from "./ampel3"
 
-const NebenStraße=({containerSize,ampColor}:{containerSize:number,ampColor:string}) => {
+const NebenStraße=({containerSize,ampColor}:{containerSize:number,ampColor:Color}) => {
   const classes = useStyles()
 
   
