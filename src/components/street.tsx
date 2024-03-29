@@ -2,16 +2,15 @@ import React, { useEffect, useState } from "react";
 import Stack from "@mui/material/Stack";
 import AmpelFüß from "./ampel2";
 import AdjustOutlinedIcon from "@mui/icons-material/AdjustOutlined";
-import Ampel from "./ampel";
 import { Button } from "@mui/material";
 import { useStyles } from "../style/styles";
-import { BuildLines, BuildWeg } from "../utils/whiteLine";
+import {  BuildWeg } from "../utils/whiteLine";
 import { traficLight } from "../lib/Data";
 import NebenStraße from "./nebenStraße";
-import type { Lights } from "../lib/types";
-import type { Color } from "../lib/types";
+import type { Color, Lights } from "../lib/types";
 import HandleResize from "../hooks/handleResize";
 import HandleColor from "../hooks/handleColor";
+import HauptStraße from "./hauptStraße";
 
 const Street: React.FC = () => {
   const [activeSignal, setActiveSignal] = useState<Color>("green");
@@ -68,27 +67,7 @@ const Street: React.FC = () => {
       />
       {/*------ HauptStraße ------*/}
       <div className={classes.street}>
-        <div
-          style={{
-            position: "absolute",
-            bottom: "100%",
-            right: "52%",
-          }}
-        >
-          <Ampel col={click ? activeSignal : "green"} />
-        </div>
-        <div
-          style={{
-            position: "relative",
-            top: "50%",
-            paddingLeft: "60px",
-            paddingRight: "10px",
-          }}
-        >
-          <div className={classes.lines}>
-            <BuildLines lineNumber={containerSize.width} />
-          </div>
-        </div>
+        <HauptStraße col={click ? activeSignal : "green"} />
 
         <div
           style={{
