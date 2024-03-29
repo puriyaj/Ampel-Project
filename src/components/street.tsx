@@ -6,21 +6,18 @@ import Ampel from "./ampel";
 import { Button } from "@mui/material";
 import { useStyles } from "../style/styles";
 import { BuildLines, BuildWeg } from "../utils/whiteLine";
-import { traficLight, traficLightNebenStraße } from "../lib/Data";
+import { traficLight } from "../lib/Data";
 import NebenStraße from "./nebenStraße";
 import type { Lights } from "../lib/types";
 import type { Color } from "../lib/types";
+import HandleResize from "../hooks/handleResize";
+import HandleColor from "../hooks/handleColor";
 
 const Street: React.FC = () => {
-  const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
-  const [activeSecSignal, setActiveSecSignal] = useState<Color>("red");
   const [activeSignal, setActiveSignal] = useState<Color>("green");
   const [click, setClick] = useState<boolean>(false);
   const [secClick, setSecClick] = useState<boolean>(false);
   const light = traficLight.find((lig) => lig.color === activeSignal) as Lights;
-  const lightSec = traficLightNebenStraße.find(
-    (lig) => lig.color === activeSecSignal
-  ) as Lights;
   const [füßColor, setFüßColor] = useState<Color>("red");
 
   const handleClick = () => {
@@ -56,34 +53,9 @@ const Street: React.FC = () => {
     return () => {};
   }, [light, activeSignal, füßColor, secClick]);
 
-  //change the color of secondary traffic light
-  useEffect(() => {
-    const timerId = setTimeout(() => {
-      setActiveSecSignal(lightSec!.next);
-    }, lightSec!.wait);
-
-    return () => {
-      clearTimeout(timerId);
-    };
-  }, [lightSec, activeSecSignal]);
-
-  //  add white line if window is big
-  useEffect(() => {
-    const handleResize = () => {
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-      setContainerSize({ width, height });
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
   const classes = useStyles();
-
+  const { containerSize } = HandleResize();
+  const activeSecSignal = HandleColor();
   return (
     <>
       <Button variant="contained" color="primary" onClick={handleClick}>
