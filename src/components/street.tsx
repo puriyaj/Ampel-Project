@@ -18,12 +18,10 @@ const Street: React.FC = () => {
   const [click, setClick] = useState<boolean>(false);
   const [secClick, setSecClick] = useState<boolean>(false);
   const light = traficLight.find((lig) => lig.color === activeSignal) as Lights;
-  const light2 = traficLight.find((lig) => lig.color === activeSecSignal) as Lights;
+  const light2 = traficLight.find(
+    (lig) => lig.color === activeSecSignal
+  ) as Lights;
   const [füßColor, setFüßColor] = useState<Color>("red");
-
-  const handleClick = () => {
-    setClick(true);
-  };
 
   useEffect(() => {
     if (activeSignal === "green") {
@@ -57,16 +55,26 @@ const Street: React.FC = () => {
   }, [light, activeSignal, click]);
   //change the color of small light
   useEffect(() => {
+    if (secClick && light2!.color === "pink") {
+      setFüßColor("green");
+      setTimeout(() => {
+        setSecClick(false);
+      }, 5000);
+    }
     if (secClick && light2!.color != "green") {
       setFüßColor("green");
       setTimeout(() => {
         setSecClick(false);
       }, 5000);
     } else if (secClick && light2!.color == "green") {
-      setFüßColor("red");
-      setTimeout(() => {
-        setSecClick(true);
-      }, light2!.wait);
+      if (füßColor == "green") {
+        setSecClick(false);
+      } else {
+        setFüßColor("red");
+        setTimeout(() => {
+          setSecClick(true);
+        }, 5000);
+      }
     } else {
       setFüßColor("red");
     }
@@ -77,7 +85,11 @@ const Street: React.FC = () => {
 
   return (
     <>
-      <Button variant="contained" color="primary" onClick={handleClick}>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => setClick(true)}
+      >
         Start
       </Button>
 
