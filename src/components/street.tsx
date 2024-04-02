@@ -8,17 +8,13 @@ import { traficLight } from "../lib/Data";
 import NebenStraße from "./nebenStraße";
 import type { Color, Lights } from "../lib/types";
 import HandleResize from "../hooks/handleResize";
-import HandleColor from "../hooks/handleColor";
 import HauptStraße from "./hauptStraße";
 import { MyStreet } from "../style/styles";
 
-
-
-
-
-
 const Street: React.FC = () => {
   const [activeSignal, setActiveSignal] = useState<Color>("green");
+  const [activeSecSignal, setActiveSecSignal] = useState<Color>("red");
+
   const [click, setClick] = useState<boolean>(false);
   const [secClick, setSecClick] = useState<boolean>(false);
   const light = traficLight.find((lig) => lig.color === activeSignal) as Lights;
@@ -26,19 +22,38 @@ const Street: React.FC = () => {
 
   const handleClick = () => {
     setClick(true);
-    
   };
+
+  useEffect(() => {
+    if (activeSignal === "green") {
+      setActiveSecSignal("red");
+    }
+
+    if (activeSignal === "yellow") {
+      setActiveSecSignal("pink");
+    }
+
+    if (activeSignal === "red") {
+      setActiveSecSignal("green");
+    }
+
+    if (activeSignal === "pink") {
+      setActiveSecSignal("yellow");
+    }
+
+    return () => {};
+  }, [light, activeSignal]);
 
   //change the color of main traffic light
   useEffect(() => {
-    const timerId = setTimeout(() => {
-      setActiveSignal(light!.next);
-    }, light!.wait);
+    if (click) {
+      setTimeout(() => {
+        setActiveSignal(light!.next);
+      }, light!.wait);
+    }
 
-    return () => {
-      clearTimeout(timerId);
-    };
-  }, [light, activeSignal]);
+    return () => {};
+  }, [light, activeSignal, click]);
   //change the color of small light
   useEffect(() => {
     if (secClick && light!.color != "green") {
@@ -57,9 +72,8 @@ const Street: React.FC = () => {
     return () => {};
   }, [light, activeSignal, füßColor, secClick]);
 
- 
   const { containerSize } = HandleResize();
-  const activeSecSignal = HandleColor();
+
   return (
     <>
       <Button variant="contained" color="primary" onClick={handleClick}>
