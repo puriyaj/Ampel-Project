@@ -1,6 +1,6 @@
 # [see the website](https://ampel-project.vercel.app)
 
-
+This Project is Responsive (usable also on Phone )
 
 # React + TypeScript + Vite
 
