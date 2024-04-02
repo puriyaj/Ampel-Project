@@ -18,6 +18,7 @@ const Street: React.FC = () => {
   const [click, setClick] = useState<boolean>(false);
   const [secClick, setSecClick] = useState<boolean>(false);
   const light = traficLight.find((lig) => lig.color === activeSignal) as Lights;
+  const light2 = traficLight.find((lig) => lig.color === activeSecSignal) as Lights;
   const [füßColor, setFüßColor] = useState<Color>("red");
 
   const handleClick = () => {
@@ -56,21 +57,21 @@ const Street: React.FC = () => {
   }, [light, activeSignal, click]);
   //change the color of small light
   useEffect(() => {
-    if (secClick && light!.color != "green") {
+    if (secClick && light2!.color != "green") {
       setFüßColor("green");
       setTimeout(() => {
         setSecClick(false);
       }, 5000);
-    } else if (secClick && light!.color == "green") {
+    } else if (secClick && light2!.color == "green") {
       setFüßColor("red");
       setTimeout(() => {
         setSecClick(true);
-      }, light!.wait);
+      }, light2!.wait);
     } else {
       setFüßColor("red");
     }
     return () => {};
-  }, [light, activeSignal, füßColor, secClick]);
+  }, [light2, activeSignal, füßColor, secClick]);
 
   const { containerSize } = HandleResize();
 
