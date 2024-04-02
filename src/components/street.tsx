@@ -12,8 +12,8 @@ import HauptStraße from "./hauptStraße";
 import { MyStreet } from "../style/styles";
 
 const Street: React.FC = () => {
-  const [activeSignal, setActiveSignal] = useState<Color>("green");
-  const [activeSecSignal, setActiveSecSignal] = useState<Color>("red");
+  const [activeSignal, setActiveSignal] = useState<Color>("red");
+  const [activeSecSignal, setActiveSecSignal] = useState<Color>("green");
 
   const [click, setClick] = useState<boolean>(false);
   const [secClick, setSecClick] = useState<boolean>(false);
@@ -82,11 +82,11 @@ const Street: React.FC = () => {
 
       <NebenStraße
         containerSize={containerSize.height}
-        ampColor={click ? activeSecSignal : "red"}
+        ampColor={click ? activeSignal : "red"}
       />
       {/*------ HauptStraße ------*/}
       <MyStreet>
-        <HauptStraße col={click ? activeSignal : "green"} />
+        <HauptStraße col={click ? activeSecSignal : "green"} />
 
         <div
           style={{
