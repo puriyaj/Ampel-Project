@@ -1,12 +1,11 @@
 import HandleResize from "../hooks/handleResize"
 import { Color } from "../lib/types"
-import { useStyles } from "../style/styles"
+import { MyLines } from "../style/styles"
 import { BuildLines } from "../utils/whiteLine"
 import Ampel from "./ampel"
 
 const HauptStraße = ({col}:{col:Color}) => {
-  const classes = useStyles()
-  const {containerSize} = HandleResize()
+const {containerSize} = HandleResize()
 return (
   <>
   <div
@@ -26,9 +25,9 @@ return (
             paddingRight: "10px",
           }}
         >
-          <div className={classes.lines}>
+          <MyLines>
             <BuildLines lineNumber={containerSize.width} />
-          </div>
+          </MyLines>
         </div>
   </>
 )

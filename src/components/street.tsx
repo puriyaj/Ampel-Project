@@ -3,7 +3,6 @@ import Stack from "@mui/material/Stack";
 import AmpelFüß from "./ampel2";
 import AdjustOutlinedIcon from "@mui/icons-material/AdjustOutlined";
 import { Button } from "@mui/material";
-import { useStyles } from "../style/styles";
 import { BuildWeg } from "../utils/whiteLine";
 import { traficLight } from "../lib/Data";
 import NebenStraße from "./nebenStraße";
@@ -11,6 +10,12 @@ import type { Color, Lights } from "../lib/types";
 import HandleResize from "../hooks/handleResize";
 import HandleColor from "../hooks/handleColor";
 import HauptStraße from "./hauptStraße";
+import { MyStreet } from "../style/styles";
+
+
+
+
+
 
 const Street: React.FC = () => {
   const [activeSignal, setActiveSignal] = useState<Color>("green");
@@ -52,7 +57,7 @@ const Street: React.FC = () => {
     return () => {};
   }, [light, activeSignal, füßColor, secClick]);
 
-  const classes = useStyles();
+ 
   const { containerSize } = HandleResize();
   const activeSecSignal = HandleColor();
   return (
@@ -66,7 +71,7 @@ const Street: React.FC = () => {
         ampColor={click ? activeSecSignal : "red"}
       />
       {/*------ HauptStraße ------*/}
-      <div className={classes.street}>
+      <MyStreet>
         <HauptStraße col={click ? activeSignal : "green"} />
 
         <div
@@ -90,7 +95,7 @@ const Street: React.FC = () => {
             </Stack>
           </Stack>
         </div>
-      </div>
+      </MyStreet>
     </>
   );
 };
